@@ -15,7 +15,7 @@ const io = socketio(server,{
   cors: {
       origin: "https://netlify-thinks-mauricio-is-great-59894.netlify.app/",
       methods: ["GET", "POST"],
-      // credentials: true
+      credentials: true
     }
 });
 
