@@ -1,16 +1,20 @@
-import { createServer } from "http";
-import { Server } from "socket.io";
-import { addUser, removeUser, getUser, getUsers, getUsersInRoom } from "./users.js";
-import { addRoom, getRooms } from "./rooms.js";
+const { addUser, removeUser, getUser, getUsers, getUsersInRoom } = require('./users');
+const { addRoom, removeRoom, getRooms } = require('./rooms');
 
-const httpServer = createServer();
-const io = new Server(httpServer, {
-  cors: {
-    origin: "http://localhost:3000",
-  },
-});
+const http = require('http');
+const express = require('express');
+const socketio = require('socket.io');
+const cors = require('cors');
 
-const PORT = process.env.PORT || 5000;
+
+const router = require('./router');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
+
+app.use(cors());
+app.use(router);
 
 io.on("connection", (socket) => {
   console.log("new connection!!");
@@ -85,7 +89,4 @@ io.on("connection", (socket) => {
   });
 });
 
-
-httpServer.listen(PORT, () => {
-  console.log(`Server has started on port ${PORT}`);
-});
+server.listen(process.env.PORT || 5000, () => console.log(`Server has started.`));

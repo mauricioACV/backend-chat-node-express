@@ -1,6 +1,6 @@
 const rooms = ['arcade', 'webdesign', 'coding'];
 
-export const addRoom = ({ room }) => {
+const addRoom = ({ room }) => {
   room = room.trim().toLowerCase();
   const existingRoom = rooms.includes(room);
   if (existingRoom) return { error: "La sala ya existe" };
@@ -9,9 +9,11 @@ export const addRoom = ({ room }) => {
   return { rooms };
 };
 
-export const removeRoom = (id) => {
+const removeRoom = (id) => {
   const index = rooms.findIndex((room) => room.id === id);
   if (index !== -1) return rooms.splice(index, 1)[0];
 };
 
-export const getRooms = () => rooms;
+const getRooms = () => rooms;
+
+module.exports = { addRoom, removeRoom, getRooms };
