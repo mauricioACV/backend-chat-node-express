@@ -13,7 +13,12 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-app.use(cors());
+var corsOptions = {
+  origin: "https://netlify-thinks-mauricio-is-great-59894.netlify.app/",
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(router);
 
 io.on("connection", (socket) => {
