@@ -11,14 +11,15 @@ const router = require('./router');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
+const io = socketio(server,{
+  cors: {
+      origin: "https://netlify-thinks-mauricio-is-great-59894.netlify.app/",
+      methods: ["GET", "POST"],
+      // credentials: true
+    }
+});
 
-var corsOptions = {
-  origin: "https://netlify-thinks-mauricio-is-great-59894.netlify.app/",
-  optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(router);
 
 io.on("connection", (socket) => {
