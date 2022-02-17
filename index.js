@@ -12,7 +12,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer{
   cors: {
-    origin: "https://example.com"
+    origin: "https://netlify-thinks-mauricio-is-great-59894.netlify.app/"
   }
 });
 
