@@ -16,7 +16,7 @@ const io = new Server(httpServer, {
   },
 });
 
-// app.use(cors());
+app.use(cors());
 app.use(router);
 
 const PORT = process.env.PORT || 5000;
