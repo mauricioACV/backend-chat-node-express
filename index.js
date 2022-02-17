@@ -10,13 +10,9 @@ import { router } from "./router.js";
 const app = express();
 
 const httpServer = createServer(app);
-const io = new Server(httpServer, {
-  cors: {
-    origin: "https://netlify-thinks-mauricio-is-great-59894.netlify.app/"
-  }
-});
+const io = new Server(httpServer);
 
-// app.use(cors());
+app.use(cors());
 app.use(router);
 
 const PORT = process.env.PORT || 5000;
