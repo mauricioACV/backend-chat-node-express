@@ -5,7 +5,6 @@ export const addRoom = ({ room }) => {
   const existingRoom = rooms.includes(room);
   if (existingRoom) return { error: "La sala ya existe" };
   rooms.push(room);
-  console.log(rooms);
   return { rooms };
 };
 

@@ -9,7 +9,6 @@ export const addUser = ({ id, name, room, avatar }) => {
   if (existingUser) return { error: "nombre de usuario no disponible" };
   const user = { id, name, room, avatar };
   users.push(user);
-  console.log(users);
   return {user};
 };
 

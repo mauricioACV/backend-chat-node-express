@@ -41,7 +41,6 @@ io.on("connection", (socket) => {
 
   socket.on("getRooms", () => {
     const rooms = getRooms();
-    console.log(rooms)
     socket.emit("roomsList", {
       rooms
     });
@@ -73,7 +72,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sendMessage", (message, callback) => {
-    console.log(message);
     const user = getUser(socket.id);
     io.to(user.room).emit("message", { user: user.name, text: message });
     //en caso de requerir hacer algo despues de enviar el mensaje el front
