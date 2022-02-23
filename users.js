@@ -1,4 +1,5 @@
 const users = [];
+const usersNicknames = [];
 
 export const addUser = ({ id, name, room, avatar }) => {
   name = name.trim().toLowerCase();
@@ -11,6 +12,10 @@ export const addUser = ({ id, name, room, avatar }) => {
   users.push(user);
   return {user};
 };
+
+export const addNickname = ({name}) => {
+
+}
 
 export const removeUser = (id) => {
   const index = users.findIndex((user) => user.id === id);

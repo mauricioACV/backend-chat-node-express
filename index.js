@@ -33,8 +33,16 @@ io.on("connection", (socket) => {
   });
 
   socket.on("getUsers", () => {
+    console.log('getUsers')
     const users = getUsers();
     socket.emit("usersList", {
+      users
+    });
+  });
+
+  socket.on("updateUsersList", () => {
+    const users = getUsers();
+    socket.broadcast.emit("usersList", {
       users
     });
   });
@@ -87,6 +95,10 @@ io.on("connection", (socket) => {
       io.to(user.room).emit("roomData", {
         room: user.room,
         users: getUsersInRoom(user.room),
+      });
+      //Actualiza lista de usuarios
+      socket.broadcast.emit("usersList", {
+        users : getUsers()
       });
     }
   });
