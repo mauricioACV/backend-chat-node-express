@@ -33,7 +33,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("getUsers", () => {
-    console.log('getUsers')
     const users = getUsers();
     socket.emit("usersList", {
       users
