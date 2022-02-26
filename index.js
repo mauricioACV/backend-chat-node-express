@@ -1,7 +1,7 @@
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { addUser, removeUser, getUser, getUsers, getUsersInRoom } from "./users.js";
-import { addRoom, getRooms } from "./rooms.js";
+import { addRoom, getRooms, removeRoom } from "./rooms.js";
 import cors from 'cors';
 import express from 'express';
 import { router } from "./router.js";
@@ -89,6 +89,7 @@ io.on("connection", (socket) => {
     console.log("user disconnect!!");
     const user = removeUser(socket.id);
     if(user) {
+      const room = removeRoom(user.room);
       io.to(user.room).emit('message', {user:'admin', text: `${user.name} se ha desconectado...`});
       //actualiza el estado de usuarios conectados en el room
       io.to(user.room).emit("roomData", {
