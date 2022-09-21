@@ -5,6 +5,7 @@ import { addRoom, getRooms, removeRoom } from "./rooms.js";
 import cors from 'cors';
 import express from 'express';
 import { router } from "./router.js";
+import {PORT} from "./config";
 
 
 const app = express();
@@ -18,8 +19,6 @@ const io = new Server(httpServer, {
 
 app.use(cors());
 app.use(router);
-
-const PORT = process.env.PORT || 5000;
 
 io.on("connection", (socket) => {
   console.log("new connection!!");
@@ -62,7 +61,7 @@ io.on("connection", (socket) => {
       user: "admin",
       text: `${user.name}, bienvenid@ a room ${user.room}`,
     });
-    //mensaje para todos los usuarios del canal, meons para el usario que se unió al canal
+    //mensaje para todos los usuarios del canal, menos para el usario que se unió al canal
     socket.broadcast
       .to(user.room)
       .emit("message", { user: "admin", text: `${user.name}, se ha unido al chat!` });
@@ -96,7 +95,7 @@ io.on("connection", (socket) => {
         room: user.room,
         users: getUsersInRoom(user.room),
       });
-      //Actualiza lista de usuarios
+      //Actualiza lista de usuarios en todos los lugares donde esperan la información de este evento
       socket.broadcast.emit("usersList", {
         users : getUsers()
       });
