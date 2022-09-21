@@ -5,7 +5,7 @@ import { addRoom, getRooms, removeRoom } from "./rooms.js";
 import cors from 'cors';
 import express from 'express';
 import { router } from "./router.js";
-import {PORT} from "./config";
+import {PORT} from "./config.js";
 
 
 const app = express();
